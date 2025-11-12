@@ -1,0 +1,21 @@
+[Unit]
+Description=MNML Fashion Shop
+After=network.target
+
+[Service]
+Type=notify
+User=root
+WorkingDirectory=/home/ubuntu/online_shop
+Environment="PATH=/home/ubuntu/online_shop/venv/bin"
+ExecStart=/home/ubuntu/online_shop/venv/bin/gunicorn -c gunicorn.conf.py app:app
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Memory and resource limits for low-resource instances
+MemoryMax=512M
+MemoryHigh=400M
+
+[Install]
+WantedBy=multi-user.target
